@@ -1,4 +1,5 @@
 import random
+import time
 
 class Team:
     def __init__(self, name, warCry, foundedIn ):
@@ -56,6 +57,7 @@ def game(teamA, teamB):
     pointB = 50
 
     while True:
+        print(f"Jogo ", teamA,"vs ", teamB)
         print(f"1 - Registrar um 'blot' para o time", teamA)
         print(f"2 - Registrar um 'blot' para o time", teamB)
         print(f"3 - Registrar um 'plif' para o time", teamA)
@@ -81,13 +83,27 @@ def game(teamA, teamB):
         else:
             print("Opção inválida.")
 
-        if pointA > pointB:
-            print(pointA, 'venceu')
-        elif pointB > pointA:
-            print(pointB, 'venceu')
-        else:
-            print('empate')
+        print(f"{teamA} {pointA} x {pointB} {teamB}")
 
+    if pointA > pointB:
+        print(teamA, 'venceu e avança para a próxima fase.')
+    elif pointB > pointA:
+        print(teamB, 'venceu e avança para a próxima fase.')
+    else:
+        print('Grusht - ocorreu um empate!')
+        for i in range(10):
+            result = random.randint(0,10)
+            if(result % 2 == 0):
+                resA = i+1
+                print('grito do time',teamA)
+            else:
+                resB = i+1
+                print('grito do time',teamB)
+    
+        if (resA>resB):
+            print(teamA, 'venceu e avança para a próxima fase.')
+        else:
+            print(teamB, 'venceu e avança para a próxima fase.')
 
 def chooseMatch():
     print('Escolha qual das partidas você deseja jogar:')
@@ -99,12 +115,15 @@ def chooseMatch():
                 print(f"Você escolheu o jogo {escolha}:")
                 print(f"{list[jogo_escolhido]} vs {list[jogo_escolhido + 1]}")
                 game(f"{list[jogo_escolhido]}", f"{list[jogo_escolhido + 1]}")
-
                 break
             else:
                 print("Escolha inválida. Digite um número entre 1 e", len(list) // 2)
         except ValueError:
             print("Por favor, digite um número inteiro.")
+
+# crio uma lista que vai colocando os que foram classificados e comparo
+# com a lista de cadastro inicial 
+# time que venceu vai direto para a lista
 
 def registerTeams():
     amountTeam = int(input("Deseja cadastrar quantas equipes?"))
